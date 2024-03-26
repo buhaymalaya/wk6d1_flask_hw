@@ -1,0 +1,135 @@
+FLASK INSTRUCTIONS TEXT - ALWAYS ADD TO VENV PROJECT AS A GUIDE
+
+1. Create virtual environment -- python3 -m venv venv
+(second venv is the name so whatever you choose to name the environment)
+If there is a popup, click no
+
+2. Activate virtual environment (venv) shell - source venv/bin/activate
+type every time you want to activate virtual environment
+Venv\scripsts\activate - windows
+
+3. Install flask before importing - pip3 install flask
+
+4. pip3 freeze > requirements.txt (contains all dependencies and packages)
+- run to update whenever a change is made within venv
+
+pip3 install python-dotenv
+
+5. to run file, type: flask run (instead of play button)
+
+6. create .env file outside of venv folder
+
+7. remember to use:
+pip freeze
+
+.gitignore and enumerate files to not follow
+
+8. .env (to contain private/secret info/API/database)
+FLASK_APP = run.py
+FLASK_DEBUG = 1
+
+then flask run on terminal
+then type pip install python-dotenv
+
+COLLABS
+
+Grab repo link to collab on
+Clone repo
+To download exact same requirements from cloned repo, type: 
+pip install -r requirements.txt (after activating venv)
+Create your own .env file since that was ignored in original repo
+
+
+Week 5 Day 4
+
+Syntax for installing packages - Pip install package-name package-name2 …
+
+Pip3 install flask-sqlalchemy flask-migrate psycopg2-binary 
+(-binary for mac)
+
+When making changes:
+Flask db init (if messed up database, delete migration folder)
+Flask db migrate
+Flask db upgrade (pushing)
+
+Create new folder - ‘models’
+Create two files under: user_model.py and post_model.py
+
+Create python class that will be translated into a SQL table
+Under user model
+
+From app import db (remember that it was instantiated)
+See: user_model.py; class UserModel
+The model is based on the UserSchema
+
+To send class UserModel to elephantsql as a table:
+
+Step 1:
+Set new link to .env
+
+FLASK_APP=run.py
+FLASK_DEBUG=1
+DB_URL=postgresql://rizhampe:8YV5jowI3_zlttEYzViv0r8JgGCLY420@raja.db.elephantsql.com/rizhampe 
+
+Remember to:
+add “ql”
+Change SQLALCHEMY_DATABASE_URI to DB_URL (see above)
+
+Step 2:
+Under class Config under Config.py
+Import os 
+Add SQLALCHEMY_DATABASE_URI = os.environ.get(DB_URL)
+
+Flask run to check if working
+
+App init:
+From models.user_model import UserModel
+Flask db init (if messed up database, delete migration folder)
+Flask db migrate
+Flask db upgrade (pushing)
+
+Check corresponding elephantsql link to see if table has been created
+
+
+
+
+
+
+
+
+
+
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods post, get, put, delete (CRUD)
+
+Flask common use tips/reminders:
+Don't forget .gitignore!
+-generally contains:
+venv
+.env
+__pycache__
+migrations
+Requirements.txt:
+pip freeze > requirements.txt
+^^creates folder and/or updates; use this every time you add/change packages
+
+pip list
+^^lists packages installed
+
+pip install -r requirements.txt
+^^pip installs all dependencies listed in requirements.txt
+Venv:
+
+python -m venv <name of venv>
+^^creates VENV
+
+<name of venv>\scripts\activate
+^^Start venv PC
+
+source venv/bin/activate
+^^Start venv MAC
+
+deactivate
+^^ deactivates venv
+
+
