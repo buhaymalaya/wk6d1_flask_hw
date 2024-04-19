@@ -4,3 +4,20 @@ The goal for tonight's assignment is to make sure all routes related to CRUD ope
 incorporating/using the DB!  If you were able to tackle this for the weekend assignment 
 please make sure all are integrated correctly and you're good to go.  
 Incorporate nested schema for an extra challenge!
+
+
+CORS
+
+
+Within Component, use useEffect to initiate a fetch on component mount.
+
+    Use fetch or axios.get to retrieve data from your Flask API endpoint (e.g., http://localhost:5000/api/data).
+
+    Store the response data in state using useState.
+    Display the data in your component.
+
+    Implement error handling within the request to log any errors.
+
+    Run your React app and ensure the component renders the data fetched from the Flask API.
+
+    Submit your React component code via the provided submission link or repository by the deadline.

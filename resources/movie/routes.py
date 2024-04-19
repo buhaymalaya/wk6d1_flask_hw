@@ -2,6 +2,7 @@ from flask import jsonify
 from flask.views import MethodView
 from flask_smorest import abort
 from uuid import uuid4
+from flask_jwt_extended import jwt_required
 
 from schemas import MovieSchema, MovieWithDirectorSchema
 from . import bp
@@ -12,7 +13,7 @@ from app import db
 
 @bp.route('/movie')
 class MovieList(MethodView):
-    
+    @jwt_required()
     @bp.response(201, MovieWithDirectorSchema)
     @bp.arguments(MovieSchema)
     def post(self, movie_data):

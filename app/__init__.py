@@ -1,19 +1,21 @@
 from flask import Flask
 from flask_smorest import Api
 
-# from flask_cors import CORS 
+from flask_cors import CORS 
 # after installations pip etc
 
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate 
+from flask_migrate import Migrate
+from flask_jwt_extended import JWTManager 
 
 from Config import Config
 
 app = Flask(__name__)
 app.config.from_object(Config)
 api = Api(app)
+jwt= JWTManager(app)
 
-# CORS(app)
+CORS(app)
 
 db = SQLAlchemy(app) #instantiate
 migrate = Migrate(app, db) 

@@ -2,6 +2,7 @@ from flask import request
 from flask.views import MethodView
 from uuid import uuid4
 from flask_smorest import abort
+from flask_jwt_extended import create_access_token
 
 from schemas import DirectorSchema, DirectorWithMovieSchema
 from . import bp
@@ -64,3 +65,23 @@ class Director(MethodView):
         abort(400, message='Not a valid entry')
         
 
+
+##### jwt 
+        
+@bp.post('/login')
+def login():
+    login_data = request.get_json()
+    # password = request.json.get("password", None)
+    username = login_data['username']
+    user = DirectorModel.query.filter_by(username = username).first()
+    if user and user.check_password( login_data['password']):
+        access_token = create_access_token(identity=user.id)
+        return {'access_token': access_token}, 201
+    
+    abort(message="Invalid User Data")
+
+@bp.route("/logout", methods=["POST"])
+def logout():
+    response = jsonify({"msg": "logout successful"})
+    unset_jwt_cookies(response)
+    return response
